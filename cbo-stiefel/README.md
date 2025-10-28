@@ -1,4 +1,4 @@
-# Comparing Consensus-Based Optimization SDEs on the Stiefel Manifold
+# Consensus Based Optimisation on Stiefel Manifolds
 
 ## 1. Introduction: The Ha-Kim SDE and its Guarantees
 
@@ -22,9 +22,9 @@ where:
 * $\sigma > 0$ is the noise coefficient, controlling exploration.
 * $P_X(Z) = Z - \frac{1}{2}(XZ^\top X + XX^\top Z)$ is the orthogonal projection onto the tangent space $T_X V(n, k)$.
 * $M_t$ is the **consensus point**, a weighted average reflecting particles near lower function values :
-    $$
-    M_t = \sum_{j=1}^N w_t^j X_t^j, \quad w_t^j = \frac{\exp(-\beta f(X_t^j))}{\sum_{l=1}^N \exp(-\beta f(X_t^l))}
-    $$
+    
+$$M_t = \sum_{j=1}^N w_t^j X_t^j, \quad w_t^j = \frac{\exp(-\beta f(X_t^j))}{\sum_{l=1}^N \exp(-\beta f(X_t^l))}$$
+    
 * $\beta > 0$ is a parameter weighting the influence of function values (analogous to inverse temperature).
 * $B_t^i$ are independent Wiener processes on $\mathbb{R}^{n \times k}$.
 * The final term is an **Itô correction drift** ensuring trajectories remain on $V(n, k)$, with $C_{n,k} = \frac{2n-k-1}{2}$.
@@ -57,9 +57,7 @@ To address the limitations identified in the Ha-Kim (HK) SDE framework, particul
 
 The analysis within this project focuses on the **mean-field limit** of an annealed CBO system. The resulting SDE governing the evolution of a representative particle $X_t$ in this limit is given by:
 
-$$
-dX_t = \left(\lambda P_{X_t}(x_\rho(t)) - C_{n,k}\frac{\sigma(t)^2}{2}X_t\right)dt + \sigma(t) P_{X_t}(dW_t) \quad (*)
-$$
+$$dX_t = \left(\lambda P_{X_t}(x_\rho(t)) - C_{n,k}\frac{\sigma(t)^2}{2}X_t\right)dt + \sigma(t) P_{X_t}(dW_t) \quad (*)$$
 
 where:
 * $X_t \in V(n, k)$ is the state of the representative particle.
@@ -67,9 +65,9 @@ where:
 * $\sigma(t)$ is the **time-dependent noise coefficient** implementing the annealing schedule.
 * $P_{X_t}(\cdot)$ is the orthogonal projection onto the tangent space $T_{X_t} V(n, k)$.
 * $x_\rho(t)$ is the **mean-field consensus point**, calculated as an expectation with respect to the law $\rho_t$ of $X_t$:
-    $$
-    x_\rho(t) = \frac{\int_{V(n,k)} Y \exp(-\beta f(Y)) \rho(t, Y) dV(Y)}{\int_{V(n,k)} \exp(-\beta f(Y)) \rho(t, Y) dV(Y)}
-    $$
+    
+$$x_\rho(t) = \frac{\int_{V(n,k)} Y \exp(-\beta f(Y)) \rho(t, Y) dV(Y)}{\int_{V(n,k)} \exp(-\beta f(Y)) \rho(t, Y) dV(Y)}$$
+    
 * $\beta > 0$ is the weighting parameter.
 * $W_t$ is a standard Wiener process on $\mathbb{R}^{n \times k}$.
 * The term $- C_{n,k}\frac{\sigma(t)^2}{2}X_t$ is the Itô correction drift ensuring $X_t$ remains on $V(n, k)$, with $C_{n,k} = \frac{2n-k-1}{2}$.
@@ -93,14 +91,13 @@ This SDE (*) and the associated analysis plan differ significantly from the HK a
 
 4.  **Employing Lyapunov Analysis for Consensus:**
     * To demonstrate that the particle distribution eventually concentrates (achieves consensus), the project proposes using a **Lyapunov functional**, $V(t)$, defined as the **mean squared geodesic distance** from the time-varying mean-field consensus point:
-        $$
-        V(t) = \int_{V(n,k)} d(X, x_\rho(t))^2 \rho(t, X) dV(X)
-        $$
-        where $d(\cdot, \cdot)$ is the geodesic distance on $V(n, k)$. This functional differs from the variance functional based on Euclidean distance used in the HK analysis.
-    * The *aim* is to analyze the time derivative $\frac{d}{dt}V(t)$ along the trajectories of the corresponding Fokker-Planck equation:
-        $$
-        \partial_t \rho(t, X) + \nabla_V \cdot J(t, X) = 0
-        $$
+        
+$$V(t) = \int_{V(n,k)} d(X, x_\rho(t))^2 \rho(t, X) dV(X)$$
+        
+where $d(\cdot, \cdot)$ is the geodesic distance on $V(n, k)$. This functional differs from the variance functional based on Euclidean distance used in the HK analysis.
+* The *aim* is to analyze the time derivative $\frac{d}{dt}V(t)$ along the trajectories of the corresponding Fokker-Planck equation:
+        
+$$\partial_t \rho(t, X) + \nabla_V \cdot J(t, X) = 0$$
 
 In essence, the Annealed CBO SDE (*), coupled with the proposed annealing schedule and LDT/Lyapunov analysis framework, is designed to provide a more robust theoretical foundation for guaranteeing global convergence in CBO methods on the Stiefel manifold.
 
@@ -144,11 +141,11 @@ This section compares the numerical performance of the Ha-Kim (HK) SDE  with fix
 
 ### 3.1 Ackley Function
 
-The Ackley function is a challenging benchmark known for its numerous local minima surrounding a single global minimum. The function on $V(n, k)$ is defined as :
-$$
-f(X) = -a \exp\left(-b\sqrt{\frac{c^2}{nk}\sum_{i,j}(X_{ij}-X_{ij}^{*})^{2}}\right) - \exp\left(\frac{1}{nk}\sum_{i,j}\cos(2\pi c(X_{ij}-X_{ij}^{*}))\right) + e + a
-$$
-with parameters $a=20, b=0.2, c=3$ and the global minimum $f(X^*)=0$ at $X^* = I_{n,k}$.
+The Ackley function is a challenging benchmark known for its numerous local minima surrounding a single global minimum. The function on $V(n, k)$ is defined as:
+
+$$f(X) = -a \exp\left( -b\sqrt{\frac{c^2}{nk}\sum_{i,j}(X_{ij}-X_{ij}^{\*})^{2}} \right) - \exp\left(\frac{1}{nk}\sum_{i,j}\cos(2\pi c( X_{ij} - X_{ij}^{\*} ))\right) + e + a$$
+
+with parameters $a=20, b=0.2, c=3$ and the global minimum $f(X^{\*})=0$ at $X^{\*} = I_{n,k}$.
 
 #### 3.1.1 Cormac's SDE Results (Adaptive/Annealed - `CormacsCBOSolver`)
 
@@ -338,21 +335,27 @@ The theoretical analysis planned within this project aims to establish stronger 
 The first conjecture targets the behavior of the proposed Lyapunov functional $V(t) = \int_{V(n,k)} d(X, x_\rho(t))^2 \rho(t, X) dV(X)$, which measures the spread around the mean-field consensus point.
 
 > **Conjecture 1 (Consensus):** Under appropriate conditions (including a sufficiently large drift parameter $\lambda$) and the logarithmic annealing schedule $\sigma(t)$, the Lyapunov functional $V(t)$ converges to zero as time goes to infinity:
+>
 > $$\lim_{t \to \infty} V(t) = 0$$
 
 * **Proposed Proof Strategy:** This conjecture is intended to be proven by analyzing the time derivative $\frac{d}{dt}V(t)$. The analysis aims to show that $V(t)$ satisfies a **differential inequality** of the form:
-    $$
+    
+$$
     \frac{d}{dt}V(t) \le -\gamma_{eff} V(t) + K \sigma(t)^2 + K' \sigma(t)^4
-    $$
-    where $\gamma_{eff}$ is a positive net contraction rate (dependent on $\lambda$ being large enough) and $K, K'$ are positive constants. By demonstrating that the negative term $-\gamma_{eff} V(t)$ eventually dominates the forcing terms (which vanish as $\sigma(t) \to 0$), this inequality would imply that $V(t)$ must decay to zero. Successfully proving this conjecture would establish that the particle distribution collapses towards its (moving) consensus point $x_\rho(t)$.
+$$
+    
+where $\gamma_{eff}$ is a positive net contraction rate (dependent on $\lambda$ being large enough) and $K, K'$ are positive constants. By demonstrating that the negative term $-\gamma_{eff} V(t)$ eventually dominates the forcing terms (which vanish as $\sigma(t) \to 0$), this inequality would imply that $V(t)$ must decay to zero. Successfully proving this conjecture would establish that the particle distribution collapses towards its (moving) consensus point $x_\rho(t)$.
 
 #### Conjecture 2: Convergence to Global Minimum
 
 Building upon the achievement of consensus (Conjecture 1) and the results from Large Deviation Theory (guaranteeing escape from local minima under annealing), the second conjecture addresses the location of the consensus point.
 
 > **Conjecture 2 (Global Optimality):** Under the assumptions required for Conjecture 1 and the LDT analysis, the mean-field probability density $\rho(t, \cdot)$ associated with Cormac's 1st SDE converges **weakly** to a **Dirac delta measure concentrated at the global minimizer** $X^*$:
+>
 > $$\rho(t, \cdot) \xrightarrow{w} \delta_{X^*} \quad \text{as } t \to \infty$$
+>
 > Furthermore, this implies that for the corresponding finite $N$-particle system, individual particles converge in probability to the global minimum $X^*$:
+>
 > $$\lim_{t \to \infty} \lim_{N \to \infty} \mathbb{P}(d(X_t^i, X^*) > \epsilon) = 0 \quad \text{for any } \epsilon > 0$$
 
 * **Relationship to Conjecture 1:** Proving Conjecture 1 ($V(t) \to 0$) shows that $\rho(t, \cdot)$ essentially behaves like $\delta_{x_\rho(t)}$ asymptotically. The LDT analysis, ensuring escape from local minima, is needed to argue that the consensus point itself must converge to the global minimum, $\lim_{t \to \infty} x_\rho(t) = X^*$. Combining these two arguments (consensus and optimality of the consensus point) leads to the strong convergence stated in Conjecture 2.
