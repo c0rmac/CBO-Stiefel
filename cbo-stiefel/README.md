@@ -101,38 +101,6 @@ $$\partial_t \rho(t, X) + \nabla_V \cdot J(t, X) = 0$$
 
 In essence, the Annealed CBO SDE (*), coupled with the proposed annealing schedule and LDT/Lyapunov analysis framework, is designed to provide a more robust theoretical foundation for guaranteeing global convergence in CBO methods on the Stiefel manifold.
 
-<style>
-    /* 1. Reset: Ensure the image scales relative to its parent container */
-    .image-container img {
-        /* The most crucial rule: Allows the image to shrink below its original size, 
-           but never lets it exceed the width of its parent container. */
-        max-width: 100%;
-        
-        /* Ensures the height adjusts automatically to maintain the original aspect ratio */
-        height: auto; 
-        
-        /* Optional: Sets a reasonable maximum size on large desktop screens */
-        /* This prevents a small image (e.g., 500px wide) from stretching too far
-           if its container is much larger. */
-    }
-    
-    /* 2. Optional: Constrain the parent container for better control */
-    .image-container {
-        /* Fluid width: 90% of the viewport width */
-        
-        /* Constraint: Never allow the graph to exceed 1200px wide (e.g., on a desktop) */
-        max-width: 1200px;
-        
-        /* Ensure the height adjusts with the width */
-        height: auto; 
-        
-        /* Center the graph */
-        margin: 0 auto;
-
-        text-align: center;
-    }
-</style>
-
 ## 3. Analysis of Results
 
 This section compares the numerical performance of the Ha-Kim (HK) SDE  with fixed parameters against two implementations from this project: one using fixed parameters analogous to the HK paper (`KimCBOSolver`) and another using adaptive/annealing parameters (`CormacsCBOSolver`). This comparison is based on implementations found in the project's Python suite (`full_ackley_suite.py`, `full_qap_suite.py`, `full_wopp_suite.py`) across standard test problems defined on the Stiefel manifold.
