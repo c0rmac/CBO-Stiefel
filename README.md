@@ -1,3 +1,5 @@
+Note: For more details on the exact thesis, please <a href='https://github.com/c0rmac/CBO-Stiefel/blob/main/cbo-stiefel/README.md'>see here</a>
+
 ## The 6-Step Proof Architecture
 
 1.  **Establish Well-Posedness of the SDE**
