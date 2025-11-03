@@ -212,6 +212,31 @@ else
     sed -i '' "s|__VERSION__|${PROJECT_VERSION}|g" "$FORMULA_OUTPUT"
     sed -i '' "s|__SHA256__|${FORMULA_SHA256}|g" "$FORMULA_OUTPUT"
 
+    # --- 7. GIT COMMIT AND TAG (New Step) ---
+    echo "--------------------------------------------------"
+    echo ">>> COMMITTING AND TAGGING RELEASE <<<"
+
+    # 1. We still need to stage the files first.
+    echo "[INFO] Staging the three release files..."
+    git add "${TAR_FILE_PATH_RELEASE}"
+    git add "${RELEASE_DIR}/cbo-stiefel.rb"
+    # git add "${RELEASE_DIR}/RELEASE_NOTES.md"
+
+    # 2. Commit ONLY the specified paths.
+    #    This tells Git to ignore any other staged files.
+    echo "[INFO] Committing only the staged release files..."
+    git commit -m "Release: CBO Module Source Package ${TAG_NAME}" \
+        "${TAR_FILE_PATH_RELEASE}" \
+        "${RELEASE_DIR}/cbo-stiefel.rb"
+        # "${RELEASE_DIR}/RELEASE_NOTES.md"
+
+    TAG_NAME="v${PROJECT_VERSION}"
+    # Tag the commit
+    git tag -a "${TAG_NAME}" -m "Official release of the CBO-Stiefel module ${TAG_NAME}"
+
+    echo "✅ Git Commit created with tag: ${TAG_NAME}"
+    echo "--------------------------------------------------"
+
     echo "=================================================="
     echo "✅ PACKAGE & FORMULA CREATION SUCCESSFUL."
     echo "Files created in the clean release directory: $RELEASE_DIR/"

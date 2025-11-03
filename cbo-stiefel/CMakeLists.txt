@@ -129,7 +129,7 @@ set(CPACK_SOURCE_PACKAGE_FILE_NAME
 set(CPACK_SOURCE_IGNORE_FILES
     "/.git/" "/.github/" "/.idea/" "/.vs/" "/build/"
     "/cmake-build-.*" "*.pyc" "*.so" "*.dylib" "*.dll"
-    "/export/" "/releases/"
+    "/export/" "/releases/", "/demo/"
 )
 
 include(CPack)

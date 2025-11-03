@@ -122,62 +122,60 @@ with parameters $a=20, b=0.2, c=3$ and the global minimum $f(X^{\*})=0$ at $X^{\
     * **V(3, 5) Case** ($\sigma_{initial}=0.5, T=100$, Success Tol = $2 \times 10^{-3}$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V3_5_dynamics.png" alt="Ackley V(3,5) Dynamics - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V3_5_hist_full.png" alt="Ackley V(3,5) Asymptotic (Full) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V3_5_dynamics.png" alt="Ackley V(3,5) Dynamics - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V3_5_hist_full.png" alt="Ackley V(3,5) Asymptotic (Full) - Cormac"></td>
           </tr>
         </table>
-        [Your description/analysis of Cormac's V(3,5) results.]
 
     * **V(10, 20) Case** ($\sigma_{initial}=0.11, T=1500$, Success Tol = $0.5$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V10_20_dynamics.png" alt="Ackley V(10,20) Dynamics - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V10_20_hist_full.png" alt="Ackley V(10,20) Asymptotic (Full) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V10_20_dynamics.png" alt="Ackley V(10,20) Dynamics - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V10_20_hist_full.png" alt="Ackley V(10,20) Asymptotic (Full) - Cormac"></td>
           </tr>
         </table>
-        [Your description/analysis of Cormac's V(10,20) results.]
 
     * **V(1, 3) Case** ($\sigma_{initial}=0.17, T=10$, Success Tol = $1 \times 10^{-2}$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V1_3_dynamics.png" alt="Ackley V(1,3) Dynamics - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V1_3_hist_full.png" alt="Ackley V(1,3) Asymptotic (Full) - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_CormacsCBOSolver_V1_3_hist_zoom.png" alt="Ackley V(1,3) Asymptotic (Zoom) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V1_3_dynamics.png" alt="Ackley V(1,3) Dynamics - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V1_3_hist_full.png" alt="Ackley V(1,3) Asymptotic (Full) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_CormacsCBOSolver_V1_3_hist_zoom.png" alt="Ackley V(1,3) Asymptotic (Zoom) - Cormac"></td>
           </tr>
         </table>
-        [Your description/analysis of Cormac's V(1,3) results.]
+* **Comments:** In all cases, Cormac's CBO Solver converges rapidly, and variations of independent trials are within 0.00001 to 0.00005. The tiny variation suggests that the particle distribution is convering to a dirac measure.
 
-#### 3.1.2 Kim's SDE Results (Fixed Params - `KimCBOSolver`)
+#### 3.1.2 HK SDE Results (Fixed Params - `KimCBOSolver`)
 
 * **Implementation:** As configured in `full_ackley_suite.py` for `KimCBOSolver`. Uses fixed $\lambda=1.0$ and fixed $\sigma$ matching the HK paper's values for each case. $N=50$, $dt=0.05$. Trials = 104.
 * **Results:**
     * **V(3, 5) Case** ($\sigma=0.5, T=100$, Success Tol = $2 \times 10^{-3}$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V3_5_dynamics.png" alt="Ackley V(3,5) Dynamics - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V3_5_hist_full.png" alt="Ackley V(3,5) Asymptotic (Full) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V3_5_dynamics.png" alt="Ackley V(3,5) Dynamics - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V3_5_hist_full.png" alt="Ackley V(3,5) Asymptotic (Full) - Kim"></td>
           </tr>
         </table>
-        [Your description/analysis of Kim's V(3,5) results.]
+        [Your description/analysis of HK V(3,5) results.]
 
     * **V(10, 20) Case** ($\sigma=0.11, T=1500$, Success Tol = $0.5$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V10_20_dynamics.png" alt="Ackley V(10,20) Dynamics - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V10_20_hist_full.png" alt="Ackley V(10,20) Asymptotic (Full) - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V10_20_hist_zoom.png" alt="Ackley V(10,20) Asymptotic (Zoom) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V10_20_dynamics.png" alt="Ackley V(10,20) Dynamics - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V10_20_hist_full.png" alt="Ackley V(10,20) Asymptotic (Full) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V10_20_hist_zoom.png" alt="Ackley V(10,20) Asymptotic (Zoom) - Kim"></td>
           </tr>
         </table>
-        [Your description/analysis of Kim's V(10,20) results.]
+        [Your description/analysis of HK V(10,20) results.]
 
     * **V(1, 3) Case** ($\sigma=0.17, T=10$, Success Tol = $1 \times 10^{-2}$):
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V1_3_dynamics.png" alt="Ackley V(1,3) Dynamics - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/ackley/cbo_results_KimCBOSolver_V1_3_hist_full.png" alt="Ackley V(1,3) Asymptotic (Full) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V1_3_dynamics.png" alt="Ackley V(1,3) Dynamics - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/ackley/cbo_results_KimCBOSolver_V1_3_hist_full.png" alt="Ackley V(1,3) Asymptotic (Full) - Kim"></td>
           </tr>
         </table>
-        [Your description/analysis of Kim's V(1,3) results.]
+* **Comments:** In some cases, HK CBO Solver converges rapidly, and variations of independent trials are similar to that of Cormac's CBO Solver. In other cases, there are significant variations. The V(10,20) may be rectified by increasing the number of trials and tuning the sigma parameter.
 
 #### 3.1.3 Ha-Kim SDE Results (Reference)
 
@@ -188,7 +186,7 @@ with parameters $a=20, b=0.2, c=3$ and the global minimum $f(X^{\*})=0$ at $X^{\
 
 #### 3.1.4 Comparison (Ackley)
 
-* [Your description comparing performance: Compare Cormac's SDE vs. Kim's SDE vs. the reference HK results. Which achieved better success rates, especially in V(10, 20)? Was there a difference in speed or accuracy? Did adaptive/annealed parameters show a clear advantage?]
+* [Your description comparing performance: Compare Cormac's SDE vs. HK SDE vs. the reference HK results. Which achieved better success rates, especially in V(10, 20)? Was there a difference in speed or accuracy? Did adaptive/annealed parameters show a clear advantage?]
 
 ***
 
@@ -203,25 +201,25 @@ The QAP aims to minimize $f(X) = \text{tr}(AXBX^\top)$ over $O(n)$ ($V(n, n)$).
     * **V(10, 10) Case**:
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/qap/cbo_results_CormacsCBOSolver_V10_10_dynamics.png" alt="QAP V(10,10) Dynamics - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/qap/cbo_results_CormacsCBOSolver_V10_10_hist_full.png" alt="QAP V(10,10) Asymptotic (Full) - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/qap/cbo_results_CormacsCBOSolver_V10_10_hist_zoom.png" alt="QAP V(10,10) Asymptotic (Zoom) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/qap/cbo_results_CormacsCBOSolver_V10_10_dynamics.png" alt="QAP V(10,10) Dynamics - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/qap/cbo_results_CormacsCBOSolver_V10_10_hist_full.png" alt="QAP V(10,10) Asymptotic (Full) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/qap/cbo_results_CormacsCBOSolver_V10_10_hist_zoom.png" alt="QAP V(10,10) Asymptotic (Zoom) - Cormac"></td>
           </tr>
         </table>
-        [Your description/analysis of Cormac's QAP results.]
+* **Comments:** Variation between trials collapses significantly after t=100. This suggests the convergence of particle distribution to a dirac measure.
 
-#### 3.2.2 Kim's SDE Results (Fixed Params - `KimCBOSolver`)
+#### 3.2.2 HK SDE Results (Fixed Params - `KimCBOSolver`)
 
 * **Implementation:** As configured in `full_qap_suite.py`. $N=50$, fixed $\sigma=0.19$, fixed $\lambda=1.0$, $T=500$, $dt=0.05$. Success Tol = $-13.8583$. Trials = 104.
 * **Results:**
     * **V(10, 10) Case**:
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/qap/cbo_results_KimCBOSolver_V10_10_dynamics.png" alt="QAP V(10,10) Dynamics - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/qap/cbo_results_KimCBOSolver_V10_10_hist_full.png" alt="QAP V(10,10) Asymptotic (Full) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/qap/cbo_results_KimCBOSolver_V10_10_dynamics.png" alt="QAP V(10,10) Dynamics - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/qap/cbo_results_KimCBOSolver_V10_10_hist_full.png" alt="QAP V(10,10) Asymptotic (Full) - Kim"></td>
           </tr>
         </table>
-        [Your description/analysis of Kim's QAP results.]
+* **Comments:** Average reaches global optimum, but requires far more time than what was even conducted in the experiment. Variation is somewhat significant. Adjusting sigma did not seem to obtain convergence.
 
 #### 3.2.3 Ha-Kim SDE Results (Reference)
 
@@ -245,25 +243,25 @@ The WOPP seeks to minimize $f(X) = \frac{1}{2}\|AXC - B\|_F^2$ over $V(n, k)$, w
     * **V(20, 10) Case**:
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/wopp/cbo_results_CormacsCBOSolver_V10_20_dynamics.png" alt="WOPP V(20,10) Dynamics - Cormac"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/wopp/cbo_results_CormacsCBOSolver_V10_20_hist_full.png" alt="WOPP V(20,10) Asymptotic (Full) - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/wopp/cbo_results_CormacsCBOSolver_V10_20_dynamics.png" alt="WOPP V(20,10) Dynamics - Cormac"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/wopp/cbo_results_CormacsCBOSolver_V10_20_hist_full.png" alt="WOPP V(20,10) Asymptotic (Full) - Cormac"></td>
           </tr>
         </table>
-        [Your description/analysis of Cormac's WOPP results.]
+* **Comments:** Rapid convergence to global optimum with collapse in variation distribution. In general, the Cormac CBO solver seems to be able to reach a global optimum in much less time, and is more notable in some examples over others.
 
-#### 3.3.2 Kim's SDE Results (Fixed Params - `KimCBOSolver`)
+#### 3.3.2 HK SDE Results (Fixed Params - `KimCBOSolver`)
 
 * **Implementation:** As configured in `full_wopp_suite.py`. $V(10, 20)$ case. $N=50$, fixed $\sigma=0.1$, fixed $\lambda=1.0$, $T=500$, $dt=0.01$. Success Tol = $1.0$. Trials = 104.
 * **Results:**
     * **V(20, 10) Case**:
         <table>
           <tr>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/wopp/cbo_results_KimCBOSolver_V10_20_dynamics.png" alt="WOPP V(20,10) Dynamics - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/wopp/cbo_results_KimCBOSolver_V10_20_hist_full.png" alt="WOPP V(20,10) Asymptotic (Full) - Kim"></td>
-            <td class="image-container" style="vertical-align: top;"><img src="./saves/wopp/cbo_results_KimCBOSolver_V10_20_hist_zoom.png" alt="WOPP V(20,10) Asymptotic (Zoom) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/wopp/cbo_results_KimCBOSolver_V10_20_dynamics.png" alt="WOPP V(20,10) Dynamics - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/wopp/cbo_results_KimCBOSolver_V10_20_hist_full.png" alt="WOPP V(20,10) Asymptotic (Full) - Kim"></td>
+            <td class="image-container" style="vertical-align: top;"><img src="./demo/saves/wopp/cbo_results_KimCBOSolver_V10_20_hist_zoom.png" alt="WOPP V(20,10) Asymptotic (Zoom) - Kim"></td>
           </tr>
         </table>
-        [Your description/analysis of Kim's WOPP results.]
+* **Comments:** More time needed to reach a global optimum. Variation is greater, but it may not significantly influence the optimal $M$ obtained as the function has converged to a "global basin" of optimal solutions, all of which appear extremely similar.
 
 #### 3.3.3 Ha-Kim SDE Results (Reference)
 
