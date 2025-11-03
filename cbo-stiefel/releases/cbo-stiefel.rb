@@ -8,7 +8,7 @@ class CboStiefel < Formula
   # These lines will be replaced by the build script (build_cbo_module.sh)
   url "https://github.com/c0rmac/CBO-Stiefel/releases/download/v1.0.0/cbo-stiefel_module-1.0.0-Source.tar.gz"
   version "1.0.0"
-  sha256 "41feaccdb8fd17013a7a303139d07b84b535842ad6e3ed612b3667fb8967b0ff"
+  sha256 "52c34e998c5208d2743d331506d9500b4c469679ea983b624d658feed150d874"
 
   # 2. DEPENDENCIES
   depends_on "cmake" => :build
