@@ -37,13 +37,13 @@ The paper provides several significant theoretical results for this system:
 
 1.  **Well-Posedness:** It establishes the existence and uniqueness of solutions for the mean-field McKean SDE (Eq. 1.4)  and the corresponding non-linear Fokker-Planck Equation (FPE) on $V(n, k)$ (Eq. 1.3), under appropriate conditions on the initial data  (Theorem 3.1).
 2.  **Mean-Field Limit:** It rigorously proves that as the number of particles $N \to \infty$, the empirical measure of the $N$-particle system converges to the solution $\rho_t$ of the FPE  (Theorem 3.2). This justifies analyzing the FPE to understand the large-system behavior.
-3.  **Asymptotic Optimality:** The main convergence result (Theorem 3.3)  provides a sufficient condition under which the *expectation* of the solution to the FPE, $E(\rho_t) := \int_{V(n,k)} X d\rho_t(X)$, converges to a point arbitrarily close to a global minimizer $X^*$. It also shows the particle average is similarly close.
+3.  **Asymptotic Optimality:** The main convergence result (Theorem 3.3)  provides a sufficient condition under which the *expectation* of the solution to the FPE, $E(\rho_t) := \int_{V(n,k)} X d\rho_t(X)$, converges to a point arbitrarily close to a global minimizer $X^{\*}$. It also shows the particle average is similarly close.
 
 ### Shortcomings of the Guarantees
 
 While groundbreaking, the analysis in the Ha-Kim paper has limitations regarding the strength of its convergence guarantee:
 
-1.  **Convergence of Expectation, Not Distribution:** The core result (Theorem 3.3) guarantees that the *mean* or *expectation* $E(\rho_t)$ approaches the vicinity of the global minimum $X^*$. However, it **does not guarantee that the probability distribution $\rho_t$ itself concentrates** into a Dirac delta measure at $X^*$. The mean could be near $X^*$ while the particles (and thus the probability mass) remain significantly spread out across the manifold.
+1.  **Convergence of Expectation, Not Distribution:** The core result (Theorem 3.3) guarantees that the *mean* or *expectation* $E(\rho_t)$ approaches the vicinity of the global minimum $X^{\*}$. However, it **does not guarantee that the probability distribution $\rho_t$ itself concentrates** into a Dirac delta measure at $X^{\*}$. The mean could be near $X^{\*}$ while the particles (and thus the probability mass) remain significantly spread out across the manifold.
 2.  **Restrictive "Well-Preparedness" Condition:** The convergence proof relies crucially on a "well-prepared" condition on the initial data $\rho_0$ and the system parameters $(\lambda, \sigma, \beta)$  (Definition 3.1). This condition essentially requires the initial variance $V(\rho_0) := \int |X - E(\rho_0)|^2 d\rho_0(X)$ to be sufficiently small, and that parameters are chosen such that contraction dominates expansion from the outset. The analysis (Proposition 6.2)  demonstrates that *if* the variance $V(t)$ stays below a certain threshold, it decays exponentially. However, it does not prove that $V(t) \to 0$ from an *arbitrary* initial state; it primarily ensures the *maintenance* of consensus rather than its *achievement* from a dispersed state.
 3.  **Lack of Mass Concentration Guarantee:** As a consequence of the above points, the Ha-Kim framework provides no formal guarantee that the *mass* of the particle swarm definitively concentrates near the global optimum. The system might explore correctly, and its *average* position might approach the optimum, but the theory does not ensure the particles ultimately collapse to that single optimal point.
 
@@ -234,7 +234,7 @@ The QAP aims to minimize $f(X) = \text{tr}(AXBX^\top)$ over $O(n)$ ($V(n, n)$).
 
 ### 3.3 Weighted Orthogonal Procrustes Problem (WOPP)
 
-The WOPP seeks to minimize $f(X) = \frac{1}{2}\|AXC - B\|_F^2$ over $V(n, k)$, with a known minimum $f(X^*)=0$.
+The WOPP seeks to minimize $f(X) = \frac{1}{2}\|AXC - B\|_F^2$ over $V(n, k)$, with a known minimum $f(X^{\*})=0$.
 
 #### 3.3.1 Cormac's SDE Results (Adaptive/Annealed - `CormacsCBOSolver`)
 
@@ -284,11 +284,11 @@ The analysis presented in the Ha-Kim (HK) paper provides valuable insights but s
 
 ### 4.1 Guarantee from Ha, Kim, et al.
 
-The primary convergence result established for the HK SDE (Theorem 3.3 in their paper) states that under specific "well-preparedness" conditions on the initial distribution and system parameters, the **expectation** (or mean) of the particle distribution, $E(\rho_t) = \int_{V(n,k)} X d\rho_t(X)$, converges to a point arbitrarily close to a global minimizer $X^*$ as $t \to \infty$.
+The primary convergence result established for the HK SDE (Theorem 3.3 in their paper) states that under specific "well-preparedness" conditions on the initial distribution and system parameters, the **expectation** (or mean) of the particle distribution, $E(\rho_t) = \int_{V(n,k)} X d\rho_t(X)$, converges to a point arbitrarily close to a global minimizer $X^{\*}$ as $t \to \infty$.
 
-> **HK Guarantee:** $\lim_{t\to\infty} |E(\rho_t) - X^*| \le \epsilon_0$ for any $\epsilon_0 > 0$, provided the system is well-prepared.
+> **HK Guarantee:** $\lim_{t\to\infty} |E(\rho_t) - X^{\*}| \le \epsilon_0$ for any $\epsilon_0 > 0$, provided the system is well-prepared.
 
-This result ensures the *average* position approaches the optimum but **does not formally guarantee that the probability mass itself concentrates** at $X^*$.
+This result ensures the *average* position approaches the optimum but **does not formally guarantee that the probability mass itself concentrates** at $X^{\*}$.
 
 ---
 
@@ -316,15 +316,15 @@ where $\gamma_{eff}$ is a positive net contraction rate (dependent on $\lambda$ 
 
 Building upon the achievement of consensus (Conjecture 1) and the results from Large Deviation Theory (guaranteeing escape from local minima under annealing), the second conjecture addresses the location of the consensus point.
 
-> **Conjecture 2 (Global Optimality):** Under the assumptions required for Conjecture 1 and the LDT analysis, the mean-field probability density $\rho(t, \cdot)$ associated with Cormac's 1st SDE converges **weakly** to a **Dirac delta measure concentrated at the global minimizer** $X^*$:
+> **Conjecture 2 (Global Optimality):** Under the assumptions required for Conjecture 1 and the LDT analysis, the mean-field probability density $\rho(t, \cdot)$ associated with Cormac's 1st SDE converges **weakly** to a **Dirac delta measure concentrated at the global minimizer** $X^{\*}$:
 >
-> $$\rho(t, \cdot) \xrightarrow{w} \delta_{X^*} \quad \text{as } t \to \infty$$
+> $$\rho(t, \cdot) \xrightarrow{w} \delta_{X^{\*}} \quad \text{as } t \to \infty$$
 >
-> Furthermore, this implies that for the corresponding finite $N$-particle system, individual particles converge in probability to the global minimum $X^*$:
+> Furthermore, this implies that for the corresponding finite $N$-particle system, individual particles converge in probability to the global minimum $X^{\*}$:
 >
-> $$\lim_{t \to \infty} \lim_{N \to \infty} \mathbb{P}(d(X_t^i, X^*) > \epsilon) = 0 \quad \text{for any } \epsilon > 0$$
+> $$\lim_{t \to \infty} \lim_{N \to \infty} \mathbb{P}(d(X_t^i, X^{\*}) > \epsilon) = 0 \quad \text{for any } \epsilon > 0$$
 
-* **Relationship to Conjecture 1:** Proving Conjecture 1 ($V(t) \to 0$) shows that $\rho(t, \cdot)$ essentially behaves like $\delta_{x_\rho(t)}$ asymptotically. The LDT analysis, ensuring escape from local minima, is needed to argue that the consensus point itself must converge to the global minimum, $\lim_{t \to \infty} x_\rho(t) = X^*$. Combining these two arguments (consensus and optimality of the consensus point) leads to the strong convergence stated in Conjecture 2.
+* **Relationship to Conjecture 1:** Proving Conjecture 1 ($V(t) \to 0$) shows that $\rho(t, \cdot)$ essentially behaves like $\delta_{x_\rho(t)}$ asymptotically. The LDT analysis, ensuring escape from local minima, is needed to argue that the consensus point itself must converge to the global minimum, $\lim_{t \to \infty} x_\rho(t) = X^{\*}$. Combining these two arguments (consensus and optimality of the consensus point) leads to the strong convergence stated in Conjecture 2.
 
 Successfully proving both conjectures would provide a rigorous foundation demonstrating that the Annealed CBO SDE (*), under the specified conditions, guarantees convergence to and concentration at the global minimum, overcoming the limitations of the previous framework.
 
@@ -336,9 +336,9 @@ The analytical framework proposed for Cormac's 1st SDE represents a significant 
 
 ### 5.1 The Theoretical Improvement: Targeting Full Concentration
 
-A key limitation of the prior Ha-Kim (HK) framework is that its primary convergence result guarantees only that the *expectation* $E(\rho_t)$ approaches the global minimum $X^*$ under specific "well-prepared" conditions. It does not formally prove that the probability distribution $\rho_t$ itself collapses to a single point.
+A key limitation of the prior Ha-Kim (HK) framework is that its primary convergence result guarantees only that the *expectation* $E(\rho_t)$ approaches the global minimum $X^{\*}$ under specific "well-prepared" conditions. It does not formally prove that the probability distribution $\rho_t$ itself collapses to a single point.
 
-In contrast, this project's analysis for Cormac's 1st SDE targets a stronger theoretical guarantee: **weak convergence of the probability measure to a Dirac delta measure at the global minimum**, $\rho_t \xrightarrow{w} \delta_{X^*}$ (Conjecture 2). This relies on proving both:
+In contrast, this project's analysis for Cormac's 1st SDE targets a stronger theoretical guarantee: **weak convergence of the probability measure to a Dirac delta measure at the global minimum**, $\rho_t \xrightarrow{w} \delta_{X^{\*}}$ (Conjecture 2). This relies on proving both:
 1.  **Guaranteed Escape:** Achieved via the logarithmic annealing schedule derived from Large Deviation Theory, ensuring the system isn't trapped in local minima.
 2.  **Guaranteed Consensus:** Achieved via Lyapunov analysis showing the variance $V(t)$ vanishes ($V(t) \to 0$), forcing the distribution to collapse (Conjecture 1).
 
@@ -358,21 +358,21 @@ The stronger theoretical guarantee targeted by this analysis enables a robust pr
 
 #### Interpretation for Cormac's SDE (if Conjectures Hold)
 
-If the **strong convergence conjecture (Conjecture 2)** holds for Cormac's SDE ($\rho_t \xrightarrow{w} \delta_{X^*}$), then:
+If the **strong convergence conjecture (Conjecture 2)** holds for Cormac's SDE ($\rho_t \xrightarrow{w} \delta_{X^{\*}}$), then:
 * **Optimality:** Annealing ensures each run should find the global basin.
 * **Concentration:** Lyapunov analysis ensures each run's distribution collapses to a single point.
-* **Uniqueness:** Irreducibility suggests this point should be the *same* global minimum $X^*$ for all runs.
+* **Uniqueness:** Irreducibility suggests this point should be the *same* global minimum $X^{\*}$ for all runs.
 
 Therefore, under this framework, **low dispersion** among endpoints is a direct, expected consequence of successful convergence to the unique global optimum. It provides strong statistical evidence that global convergence has been achieved.
 
 #### Interpretation for HK SDE
 
 The HK analysis provides a weaker, yet still relevant, basis for endpoint analysis:
-* **Guarantee:** The HK theory guarantees that the *mean* $E(\rho_t)$ converges close to $X^*$ under well-prepared conditions.
-* **Implication:** If the mean $E(\rho_t)$ is near $X^*$, the endpoints $X_{T, k}^*$ (which determine the mean) are likely somewhat clustered. Low dispersion among endpoints might *suggest* that the mean is indeed close to the optimum and potentially that the variance $V(t)$ is small.
+* **Guarantee:** The HK theory guarantees that the *mean* $E(\rho_t)$ converges close to $X^{\*}$ under well-prepared conditions.
+* **Implication:** If the mean $E(\rho_t)$ is near $X^{\*}$, the endpoints $X_{T, k}^*$ (which determine the mean) are likely somewhat clustered. Low dispersion among endpoints might *suggest* that the mean is indeed close to the optimum and potentially that the variance $V(t)$ is small.
 * **Limitations:** However, the HK theory **does not guarantee escape from local minima** in every run, nor does it guarantee **full concentration ($V(t) \to 0$)** from arbitrary starting points. Therefore:
     * Low endpoint dispersion could indicate consistent convergence to a *local* minimum.
-    * The mean $E(\rho_t)$ could be near $X^*$ even with significant dispersion if the distribution balances correctly.
+    * The mean $E(\rho_t)$ could be near $X^{\*}$ even with significant dispersion if the distribution balances correctly.
     * The well-preparedness condition  might not hold in practice.
 
 **Conclusion:** While analyzing endpoint dispersion is possible for both algorithms, the interpretation is **more conclusive and theoretically grounded** for Cormac's SDE (assuming the conjectures hold). The targeted guarantee of full concentration at the unique global minimum provides a stronger link between low endpoint variance and successful global optimization compared to the HK guarantee on the mean alone.
@@ -383,6 +383,6 @@ The HK analysis provides a weaker, yet still relevant, basis for endpoint analys
 
 This work suggests a path forward for developing and validating optimization algorithms, especially stochastic swarm-based methods on non-Euclidean spaces:
 
-* **Theory-Driven Validation:** It promotes using strong theoretical convergence results (like $\rho_t \xrightarrow{w} \delta_{X^*}$) to justify practical, statistically sound validation methods (like endpoint variance analysis).
+* **Theory-Driven Validation:** It promotes using strong theoretical convergence results (like $\rho_t \xrightarrow{w} \delta_{X^{\*}}$) to justify practical, statistically sound validation methods (like endpoint variance analysis).
 * **Parameter Guidance:** Analytical conditions necessary for convergence (e.g., $\lambda > \lambda_{crit}$) can guide parameter tuning, moving beyond pure heuristics.
 * **Increased Confidence:** Algorithms backed by such analysis offer greater confidence in their ability to find global optima reliably, which is crucial for complex real-world applications.
