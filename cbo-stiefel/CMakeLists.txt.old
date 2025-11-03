@@ -1,5 +1,7 @@
+# filename: CMakeLists.txt
+
 cmake_minimum_required(VERSION 3.12)
-project(cbo-stiefel_module VERSION 1.0.0 LANGUAGES CXX)
+project(cbo-stiefel_module LANGUAGES CXX)
 
 # --- 1. CONFIGURATION AND DEPENDENCY FINDING ---
 
@@ -14,7 +16,7 @@ message(STATUS "Using PYTHON_EXECUTABLE hint: ${PYTHON_EXECUTABLE}")
 get_filename_component(PYTHON_BIN_DIR ${PYTHON_EXECUTABLE} DIRECTORY)
 get_filename_component(PYTHON_ROOT_DIR ${PYTHON_BIN_DIR} DIRECTORY)
 
-# Extract Python version to construct paths
+# Extract Python version to construct paths (Requires CMake 3.12+)
 execute_process(
     COMMAND ${PYTHON_EXECUTABLE} -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')"
     OUTPUT_VARIABLE PYTHON_VERSION_STRING
@@ -26,7 +28,7 @@ endif()
 message(STATUS "Derived Python Version: ${PYTHON_VERSION_STRING}")
 
 set(PYTHON_INCLUDE_DIR "${PYTHON_ROOT_DIR}/include/python${PYTHON_VERSION_STRING}")
-set(PYTHON_LIBRARY "${PYTHON_ROOT_DIR}/lib/libpython${PYTHON_VERSION_STRING}.dylib")
+set(PYTHON_LIBRARY "${PYTHON_ROOT_DIR}/lib/libpython${PYTHON_VERSION_STRING}.dylib") # Adjust extension for Linux (.so)
 
 message(STATUS "Manually Set Python Include Dir: ${PYTHON_INCLUDE_DIR}")
 message(STATUS "Manually Set Python Library: ${PYTHON_LIBRARY}")
@@ -36,7 +38,8 @@ if(NOT EXISTS "${PYTHON_INCLUDE_DIR}/Python.h")
     message(FATAL_ERROR "Python.h not found at manually set path: ${PYTHON_INCLUDE_DIR}")
 endif()
 if(NOT EXISTS "${PYTHON_LIBRARY}")
-    set(PYTHON_LIBRARY_ALT "${PYTHON_ROOT_DIR}/lib/libpython${PYTHON_VERSION_STRING}.dylib")
+    # Try alternate library name without dot
+    set(PYTHON_LIBRARY_ALT "${PYTHON_ROOT_DIR}/lib/libpython${PYTHON_VERSION_STRING}.dylib") # Check this too
     if(NOT EXISTS "${PYTHON_LIBRARY_ALT}")
          message(FATAL_ERROR "Python library not found at ${PYTHON_LIBRARY} or ${PYTHON_LIBRARY_ALT}")
     else()
@@ -45,13 +48,19 @@ if(NOT EXISTS "${PYTHON_LIBRARY}")
     endif()
 endif()
 
+# Explicitly add the include directory
 include_directories(SYSTEM ${PYTHON_INCLUDE_DIR})
 # --- End Manual Python Path Setup ---
 
-# Find Pybind11 and Eigen3
+# Find Pybind11 (Should work now as Python paths are set)
 find_package(pybind11 REQUIRED)
+
+# Find Eigen3
 find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIR})
+include_directories(${EIGEN3_INCLUDE_DIR}) # Add Eigen includes
+
+# --- GIL FIX ---
+# add_compile_definitions(EIGEN_NO_AUTOMATIC_THREADING)
 
 # --- 2. TORCH/LIBTORCH (CONDITIONAL BACKEND) ---
 set(EXTRA_INCLUDE_DIRS "")
@@ -72,64 +81,50 @@ endif()
 
 # --- 3. DEFINE THE PYTHON EXTENSION MODULE ---
 set(CBO_SOURCES
-    # Paths updated to reflect the 'src/' root directory
+    # Bindings file (Pybind11 entry point)
     src/bindings/cbo_module.cpp
+
+    # Base Solver files
     src/solvers/base_solver.h
-    src/solvers/base_solver.cpp
+    src/solvers/base_solver.cpp # Implementation moved here
+
+    # Kim Solver files
     src/solvers/kim_solver.h
     src/solvers/kim_solver.cpp
+
+    # Cormac Solver files
     src/solvers/cormac_solver.h
     src/solvers/cormac_solver.cpp
+
+    # Objective files (Headers are sufficient if definitions are inline or included)
     src/objectives/base_objective.h
     src/objectives/ackley_objective.h
+    # Add other objective headers here as you create them (e.g., wopp_objective.h)
 )
 pybind11_add_module(cbo_module SHARED ${CBO_SOURCES})
 
-# --- 3.5. FORCE OUTPUT FILENAME ---
-# Forces output name to cbo_module.so (overriding Python's PEP 3149 standard)
-set_target_properties(cbo_module PROPERTIES
-    LIBRARY_OUTPUT_NAME "cbo_module"
-    SUFFIX ".so"
-)
-
 # --- 4. TARGET PROPERTIES AND LINKAGE ---
 target_include_directories(cbo_module PUBLIC
-    src # Public includes now point to the 'src' directory
+    src
+    # Python include dir already added globally
     ${pybind11_INCLUDE_DIRS}
     ${EXTRA_INCLUDE_DIRS}
 )
 
+# Link explicitly against the found Python library and Pybind11 targets
 target_link_libraries(cbo_module PUBLIC
-    pybind11::module
+    pybind11::module # Pybind11 target handles Python linkage implicitly in newer versions
+    # Link Python library manually for robustness if pybind11::module isn't sufficient
+    # ${PYTHON_LIBRARY}
     ${EXTRA_LINK_LIBS}
 )
 
+# Set output directory
 set_target_properties(cbo_module PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}
     LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 
+# Optional: Add compiler flags
 target_compile_options(cbo_module PRIVATE $<$<CONFIG:Release>:-O3 -DNDEBUG>)
 target_compile_features(cbo_module PRIVATE cxx_std_17)
-
-# -----------------------------------------------------------
-# --- 5. CPACK SOURCE DISTRIBUTION (Process 2: tar.gz) ---
-# -----------------------------------------------------------
-# Enables the 'package_source' target to create the distribution tarball.
-
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-set(CPACK_SOURCE_GENERATOR "TGZ")
-
-# The CPack output filename
-set(CPACK_SOURCE_PACKAGE_FILE_NAME
-    "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-Source")
-
-# Ignore common files and the release/export directories
-set(CPACK_SOURCE_IGNORE_FILES
-    "/.git/" "/.github/" "/.idea/" "/.vs/" "/build/"
-    "/cmake-build-.*" "*.pyc" "*.so" "*.dylib" "*.dll"
-    "/export/" "/releases/"
-)
-
-include(CPack)
