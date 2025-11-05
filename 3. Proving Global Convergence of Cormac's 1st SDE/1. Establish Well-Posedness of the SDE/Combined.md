@@ -7,6 +7,7 @@
 **1. Bounded Gradient:** By assumption, the function $f$ is $C^1$. This implies its Riemannian gradient, $\nabla_{V(n,k)} f$, is a continuous vector field on $V(n, k)$. The norm of this gradient, $||\nabla_{V(n,k)} f(X)||_F$, is therefore a continuous real-valued function on $V(n, k)$.
 
 **2. Compact Domain:** The Stiefel manifold $V(n, k)$ is a closed and bounded subset of $\mathbb{R}^{n \times k}$, and is therefore compact.
+
 **3. Apply Extreme Value Theorem:** A continuous function on a compact set must attain a maximum value. Thus, the norm of the gradient is globally bounded. There exists a finite constant $L \ge 0$ such that:
 
 $$L = \sup_{X \in V(n, k)} ||\nabla_{V(n,k)} f(X)||_F < \infty$$
